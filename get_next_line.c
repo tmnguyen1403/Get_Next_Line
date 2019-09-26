@@ -43,7 +43,8 @@ int get_next_line(const int fd, char **line)
 		length = (size_t)counter;
 		n_line = ft_strnew(length + 1);
 		ft_strncpy(n_line, (const char *)s, length);
-		return (n_line);
+		*line = n_line;
+		return (1);
 	}
 			//malloc new string, size = counter
 			//*line = new_string
@@ -56,9 +57,12 @@ int get_next_line(const int fd, char **line)
 int main(int ac, char **av)
 {
 	char s[BUFF_SIZE];
+	char *line;
 
 	ac = 0;
 	av = 0;
 	printf("%zd\n", read(1, s, BUFF_SIZE));
+	line = 0;
+	get_next_line(1, &line);
 	return (1);
 }
